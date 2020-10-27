@@ -1,0 +1,83 @@
+<Schema name="RnMonitor Schema" description="Schema for RnMonitor data warehouse">
+    <Dimension type="TimeDimension" visible="true" highCardinality="false"
+               name="Time" description="Time Dimension">
+        <Hierarchy name="Hours" visible="true" hasAll="true" allMemberName="All Hours"
+                   primaryKey="time_tk" description="Time Hierarchy">
+            <Table name="dim_time" schema="public" alias="Time">
+            </Table>
+            <Level name="Half Day" visible="true" column="halfdayid" nameColumn="halfdaystring"
+                   type="Numeric" uniqueMembers="false" levelType="TimeUndefined" hideMemberIf="Never">
+            </Level>
+            <Level name="Quarter Day" visible="true" column="quarterdayid"
+                   nameColumn="quarterdaystring" type="Numeric" uniqueMembers="false"
+                   levelType="TimeUndefined" hideMemberIf="Never">
+            </Level>
+            <Level name="Hour" visible="true" column="hour" nameColumn="hourstring"
+                   type="Numeric" uniqueMembers="false" levelType="TimeHours" hideMemberIf="Never">
+            </Level>
+        </Hierarchy>
+    </Dimension>
+    <Dimension type="TimeDimension" visible="true" highCardinality="false" name="Date">
+        <Hierarchy name="Days" visible="true" hasAll="true" allMemberName="All Dates"
+                   primaryKey="date_tk">
+            <Table name="dim_date" schema="public" alias="date">
+            </Table>
+            <Level name="Year" visible="true" column="year" type="Numeric"
+                   uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
+            </Level>
+            <Level name="Quarter Year" visible="true" column="quarterofyear"
+                   nameColumn="quartername" type="Numeric" uniqueMembers="false"
+                   levelType="TimeQuarters" hideMemberIf="Never">
+            </Level>
+            <Level name="Month" visible="true" column="monthofyear" nameColumn="monthname"
+                   type="Numeric" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+            </Level>
+            <Level name="Day" visible="true" column="dayofmonth" nameColumn="dayname"
+                   type="Numeric" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+            </Level>
+        </Hierarchy>
+    </Dimension>
+    <Cube name="RnMonitor Cube" visible="true" cache="true" enabled="true">
+        <Table name="fact_measurement" schema="public" alias="fact">
+        </Table>
+        <DimensionUsage source="Time" usagePrefix="Time" name="Time" visible="true"
+                        foreignKey="time_tk" highCardinality="false">
+        </DimensionUsage>
+        <DimensionUsage source="Date" usagePrefix="Date" name="Date" visible="true"
+                        foreignKey="date_tk" highCardinality="false">
+        </DimensionUsage>
+        <Dimension type="StandardDimension" visible="true" foreignKey="polygon_tk" name="Polygon">
+            <Hierarchy name="Locations" visible="true" hasAll="true"
+                       allMemberName="All locations" primaryKey="polygon_id">
+                <Table name="dim_polygon" schema="public" alias="">
+                </Table>
+                <Level name="Location" visible="true" column="polygon_id" nameColumn="name"
+                       parentColumn="parent_polygon_id" nullParentValue="null" type="String"
+                       uniqueMembers="true" levelType="Regular">
+                    <Closure parentColumn="parent_polygon_id" childColumn="polygon_id">
+                        <Table name="closure" schema="public">
+                        </Table>
+                    </Closure>
+                </Level>
+            </Hierarchy>
+        </Dimension>
+        <Measure name="Radon Average" column="radon" datatype="Numeric" aggregator="avg" visible="true">
+        </Measure>
+        <Measure name="Radon max" column="radon" datatype="Numeric" aggregator="max" visible="true">
+        </Measure>
+        <Measure name="Radon Min" column="radon" datatype="Numeric" aggregator="min" visible="true">
+        </Measure>
+        <Measure name="Temperature Average" column="temperature" datatype="Numeric" aggregator="avg" visible="true">
+        </Measure>
+        <Measure name="Temeparture max" column="temperature" datatype="Numeric" aggregator="max" visible="true">
+        </Measure>
+        <Measure name="Temperature Min" column="temperature" datatype="Numeric" aggregator="min" visible="true">
+        </Measure>
+        <Measure name="Pressure Average" column="pressure" datatype="Numeric" aggregator="avg" visible="true">
+        </Measure>
+        <Measure name="Humidity Average" column="humidity" datatype="Numeric" aggregator="avg" visible="false">
+        </Measure>
+        <Measure name="Co2 Average" column="co2" datatype="Numeric" aggregator="avg" visible="false">
+        </Measure>
+    </Cube>
+</Schema>

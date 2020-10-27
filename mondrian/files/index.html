@@ -1,0 +1,63 @@
+<html>
+
+<head>
+    <title>RnMonitor Datawarehouse</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+    <h3 class="mb-4 mt-4">Using RnMonitor OLAP Server API</h3>
+    <div class="row">
+        <div class="col-12">
+            <p>This page explains how to perform Relational Online Analytical Processing (ROLAP) queries via
+                <a href="https://community.hitachivantara.com/docs/DOC-1009853">Mondrian</a> of files within the
+                RnMonitor data warehouse.</p>
+            <p>The API is available at <a
+                    href="http://localhost:8081/mondrian-rest">hhtp://localhost:8081/mondrian-rest</a></p>
+            <h4 class="mb-4 mt-4">API Usage</h4>
+            <p>There are currently four operations available on the API</p>
+            <ol>
+                <li><a href="hhtp://localhost:8081/mondrian-rest/getConnections">GET  </a><code>/getConnections</code></li>
+                <li><a href="hhtp://localhost:8081/mondrian-rest/getSchema?connectionName=RnMonitor">GET  </a><code>/getSchema?connectionName=[name]</code></li>
+                <li><a href="hhtp://localhost:8081/mondrian-rest/getMetadata?connectionName=RnMonitor">GET  </a><code>/getMetadata?connectionName=[name]</code></li>
+                <li><a href="hhtp://localhost:8081/mondrian-rest/query">POST </a><code>/query</code></li>
+            </ol>
+            <p>To retrieve data from the data warehouse, we:
+            <ol>
+                <li>Define the MDX query to produce the summarized data we want to visualize</li>
+                <li>Submit the query using the mondrian-rest API end point <a
+                        href="http://localhost:8081/mondrian-rest/query">hhtp://localhost:8081/mondrian-rest/query</a>
+                </li>
+                <li>API returns a JSON Object containing the requested data</li>
+                <li>Use JSON response to visualize or precess data on your own application</li>
+            </ol>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <p>You can further experiment with submitting <a
+                    href="https://docs.microsoft.com/en-us/sql/analysis-services/multidimensional-models/mdx/mdx-query-fundamentals-analysis-services?view=sql-server-2017">MDX</a>
+                queries to this dataset directly using the <a href="/mondrian-rest/query-ui/">mondrian-rest query UI</a>.
+                MDX is an OLAP query syntax originally developed by Microsoft; Mondrian implements
+                MDX for arbitrary Java/JDBC data sources. Because RnMonitor supplies a <a
+                        href="https://github.com/datadotworld/dw-jdbc">JDBC driver</a> for RnMonitor datasets/files, we
+                are able to use Mondrian to query those
+                datasets/files using MDX syntax.</p>
+            <p>The source code for this demonstration is available <a href="https://github.com/scoobie/RnMonitor_IPCA">here</a>.
+            </p>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,1948 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transformation>
+  <info>
+    <name>Occupation_table</name>
+    <description />
+    <extended_description />
+    <trans_version />
+    <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
+    <directory>/</directory>
+    <parameters>
+    </parameters>
+    <log>
+      <trans-log-table>
+        <connection />
+        <schema />
+        <table />
+        <size_limit_lines />
+        <interval />
+        <timeout_days />
+        <field>
+          <id>ID_BATCH</id>
+          <enabled>Y</enabled>
+          <name>ID_BATCH</name>
+        </field>
+        <field>
+          <id>CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>CHANNEL_ID</name>
+        </field>
+        <field>
+          <id>TRANSNAME</id>
+          <enabled>Y</enabled>
+          <name>TRANSNAME</name>
+        </field>
+        <field>
+          <id>STATUS</id>
+          <enabled>Y</enabled>
+          <name>STATUS</name>
+        </field>
+        <field>
+          <id>LINES_READ</id>
+          <enabled>Y</enabled>
+          <name>LINES_READ</name>
+          <subject />
+        </field>
+        <field>
+          <id>LINES_WRITTEN</id>
+          <enabled>Y</enabled>
+          <name>LINES_WRITTEN</name>
+          <subject />
+        </field>
+        <field>
+          <id>LINES_UPDATED</id>
+          <enabled>Y</enabled>
+          <name>LINES_UPDATED</name>
+          <subject />
+        </field>
+        <field>
+          <id>LINES_INPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_INPUT</name>
+          <subject />
+        </field>
+        <field>
+          <id>LINES_OUTPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_OUTPUT</name>
+          <subject />
+        </field>
+        <field>
+          <id>LINES_REJECTED</id>
+          <enabled>Y</enabled>
+          <name>LINES_REJECTED</name>
+          <subject />
+        </field>
+        <field>
+          <id>ERRORS</id>
+          <enabled>Y</enabled>
+          <name>ERRORS</name>
+        </field>
+        <field>
+          <id>STARTDATE</id>
+          <enabled>Y</enabled>
+          <name>STARTDATE</name>
+        </field>
+        <field>
+          <id>ENDDATE</id>
+          <enabled>Y</enabled>
+          <name>ENDDATE</name>
+        </field>
+        <field>
+          <id>LOGDATE</id>
+          <enabled>Y</enabled>
+          <name>LOGDATE</name>
+        </field>
+        <field>
+          <id>DEPDATE</id>
+          <enabled>Y</enabled>
+          <name>DEPDATE</name>
+        </field>
+        <field>
+          <id>REPLAYDATE</id>
+          <enabled>Y</enabled>
+          <name>REPLAYDATE</name>
+        </field>
+        <field>
+          <id>LOG_FIELD</id>
+          <enabled>Y</enabled>
+          <name>LOG_FIELD</name>
+        </field>
+        <field>
+          <id>EXECUTING_SERVER</id>
+          <enabled>N</enabled>
+          <name>EXECUTING_SERVER</name>
+        </field>
+        <field>
+          <id>EXECUTING_USER</id>
+          <enabled>N</enabled>
+          <name>EXECUTING_USER</name>
+        </field>
+        <field>
+          <id>CLIENT</id>
+          <enabled>N</enabled>
+          <name>CLIENT</name>
+        </field>
+      </trans-log-table>
+      <perf-log-table>
+        <connection />
+        <schema />
+        <table />
+        <interval />
+        <timeout_days />
+        <field>
+          <id>ID_BATCH</id>
+          <enabled>Y</enabled>
+          <name>ID_BATCH</name>
+        </field>
+        <field>
+          <id>SEQ_NR</id>
+          <enabled>Y</enabled>
+          <name>SEQ_NR</name>
+        </field>
+        <field>
+          <id>LOGDATE</id>
+          <enabled>Y</enabled>
+          <name>LOGDATE</name>
+        </field>
+        <field>
+          <id>TRANSNAME</id>
+          <enabled>Y</enabled>
+          <name>TRANSNAME</name>
+        </field>
+        <field>
+          <id>STEPNAME</id>
+          <enabled>Y</enabled>
+          <name>STEPNAME</name>
+        </field>
+        <field>
+          <id>STEP_COPY</id>
+          <enabled>Y</enabled>
+          <name>STEP_COPY</name>
+        </field>
+        <field>
+          <id>LINES_READ</id>
+          <enabled>Y</enabled>
+          <name>LINES_READ</name>
+        </field>
+        <field>
+          <id>LINES_WRITTEN</id>
+          <enabled>Y</enabled>
+          <name>LINES_WRITTEN</name>
+        </field>
+        <field>
+          <id>LINES_UPDATED</id>
+          <enabled>Y</enabled>
+          <name>LINES_UPDATED</name>
+        </field>
+        <field>
+          <id>LINES_INPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_INPUT</name>
+        </field>
+        <field>
+          <id>LINES_OUTPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_OUTPUT</name>
+        </field>
+        <field>
+          <id>LINES_REJECTED</id>
+          <enabled>Y</enabled>
+          <name>LINES_REJECTED</name>
+        </field>
+        <field>
+          <id>ERRORS</id>
+          <enabled>Y</enabled>
+          <name>ERRORS</name>
+        </field>
+        <field>
+          <id>INPUT_BUFFER_ROWS</id>
+          <enabled>Y</enabled>
+          <name>INPUT_BUFFER_ROWS</name>
+        </field>
+        <field>
+          <id>OUTPUT_BUFFER_ROWS</id>
+          <enabled>Y</enabled>
+          <name>OUTPUT_BUFFER_ROWS</name>
+        </field>
+      </perf-log-table>
+      <channel-log-table>
+        <connection />
+        <schema />
+        <table />
+        <timeout_days />
+        <field>
+          <id>ID_BATCH</id>
+          <enabled>Y</enabled>
+          <name>ID_BATCH</name>
+        </field>
+        <field>
+          <id>CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>CHANNEL_ID</name>
+        </field>
+        <field>
+          <id>LOG_DATE</id>
+          <enabled>Y</enabled>
+          <name>LOG_DATE</name>
+        </field>
+        <field>
+          <id>LOGGING_OBJECT_TYPE</id>
+          <enabled>Y</enabled>
+          <name>LOGGING_OBJECT_TYPE</name>
+        </field>
+        <field>
+          <id>OBJECT_NAME</id>
+          <enabled>Y</enabled>
+          <name>OBJECT_NAME</name>
+        </field>
+        <field>
+          <id>OBJECT_COPY</id>
+          <enabled>Y</enabled>
+          <name>OBJECT_COPY</name>
+        </field>
+        <field>
+          <id>REPOSITORY_DIRECTORY</id>
+          <enabled>Y</enabled>
+          <name>REPOSITORY_DIRECTORY</name>
+        </field>
+        <field>
+          <id>FILENAME</id>
+          <enabled>Y</enabled>
+          <name>FILENAME</name>
+        </field>
+        <field>
+          <id>OBJECT_ID</id>
+          <enabled>Y</enabled>
+          <name>OBJECT_ID</name>
+        </field>
+        <field>
+          <id>OBJECT_REVISION</id>
+          <enabled>Y</enabled>
+          <name>OBJECT_REVISION</name>
+        </field>
+        <field>
+          <id>PARENT_CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>PARENT_CHANNEL_ID</name>
+        </field>
+        <field>
+          <id>ROOT_CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>ROOT_CHANNEL_ID</name>
+        </field>
+      </channel-log-table>
+      <step-log-table>
+        <connection />
+        <schema />
+        <table />
+        <timeout_days />
+        <field>
+          <id>ID_BATCH</id>
+          <enabled>Y</enabled>
+          <name>ID_BATCH</name>
+        </field>
+        <field>
+          <id>CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>CHANNEL_ID</name>
+        </field>
+        <field>
+          <id>LOG_DATE</id>
+          <enabled>Y</enabled>
+          <name>LOG_DATE</name>
+        </field>
+        <field>
+          <id>TRANSNAME</id>
+          <enabled>Y</enabled>
+          <name>TRANSNAME</name>
+        </field>
+        <field>
+          <id>STEPNAME</id>
+          <enabled>Y</enabled>
+          <name>STEPNAME</name>
+        </field>
+        <field>
+          <id>STEP_COPY</id>
+          <enabled>Y</enabled>
+          <name>STEP_COPY</name>
+        </field>
+        <field>
+          <id>LINES_READ</id>
+          <enabled>Y</enabled>
+          <name>LINES_READ</name>
+        </field>
+        <field>
+          <id>LINES_WRITTEN</id>
+          <enabled>Y</enabled>
+          <name>LINES_WRITTEN</name>
+        </field>
+        <field>
+          <id>LINES_UPDATED</id>
+          <enabled>Y</enabled>
+          <name>LINES_UPDATED</name>
+        </field>
+        <field>
+          <id>LINES_INPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_INPUT</name>
+        </field>
+        <field>
+          <id>LINES_OUTPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_OUTPUT</name>
+        </field>
+        <field>
+          <id>LINES_REJECTED</id>
+          <enabled>Y</enabled>
+          <name>LINES_REJECTED</name>
+        </field>
+        <field>
+          <id>ERRORS</id>
+          <enabled>Y</enabled>
+          <name>ERRORS</name>
+        </field>
+        <field>
+          <id>LOG_FIELD</id>
+          <enabled>N</enabled>
+          <name>LOG_FIELD</name>
+        </field>
+      </step-log-table>
+      <metrics-log-table>
+        <connection />
+        <schema />
+        <table />
+        <timeout_days />
+        <field>
+          <id>ID_BATCH</id>
+          <enabled>Y</enabled>
+          <name>ID_BATCH</name>
+        </field>
+        <field>
+          <id>CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>CHANNEL_ID</name>
+        </field>
+        <field>
+          <id>LOG_DATE</id>
+          <enabled>Y</enabled>
+          <name>LOG_DATE</name>
+        </field>
+        <field>
+          <id>METRICS_DATE</id>
+          <enabled>Y</enabled>
+          <name>METRICS_DATE</name>
+        </field>
+        <field>
+          <id>METRICS_CODE</id>
+          <enabled>Y</enabled>
+          <name>METRICS_CODE</name>
+        </field>
+        <field>
+          <id>METRICS_DESCRIPTION</id>
+          <enabled>Y</enabled>
+          <name>METRICS_DESCRIPTION</name>
+        </field>
+        <field>
+          <id>METRICS_SUBJECT</id>
+          <enabled>Y</enabled>
+          <name>METRICS_SUBJECT</name>
+        </field>
+        <field>
+          <id>METRICS_TYPE</id>
+          <enabled>Y</enabled>
+          <name>METRICS_TYPE</name>
+        </field>
+        <field>
+          <id>METRICS_VALUE</id>
+          <enabled>Y</enabled>
+          <name>METRICS_VALUE</name>
+        </field>
+      </metrics-log-table>
+    </log>
+    <maxdate>
+      <connection />
+      <table />
+      <field />
+      <offset>0.0</offset>
+      <maxdiff>0.0</maxdiff>
+    </maxdate>
+    <size_rowset>10000</size_rowset>
+    <sleep_time_empty>50</sleep_time_empty>
+    <sleep_time_full>50</sleep_time_full>
+    <unique_connections>N</unique_connections>
+    <feedback_shown>Y</feedback_shown>
+    <feedback_size>50000</feedback_size>
+    <using_thread_priorities>Y</using_thread_priorities>
+    <shared_objects_file />
+    <capture_step_performance>N</capture_step_performance>
+    <step_performance_capturing_delay>1000</step_performance_capturing_delay>
+    <step_performance_capturing_size_limit>100</step_performance_capturing_size_limit>
+    <dependencies>
+    </dependencies>
+    <partitionschemas>
+    </partitionschemas>
+    <slaveservers>
+    </slaveservers>
+    <clusterschemas>
+    </clusterschemas>
+    <created_user>-</created_user>
+    <created_date>2020/07/14 16:35:46.289</created_date>
+    <modified_user>-</modified_user>
+    <modified_date>2020/07/14 16:35:46.289</modified_date>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <is_key_private>N</is_key_private>
+  </info>
+  <notepads>
+  </notepads>
+  <connection>
+    <name>CONN8</name>
+    <server>${POSTGRES_DB_HOST}</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>${POSTGRES_DB_NAME}</database>
+    <port>${POSTGRES_DB_PORT}</port>
+    <username>${POSTGRES_DB_USER}</username>
+    <password>${POSTGRES_DB_PASS}</password>
+    <servername />
+    <data_tablespace />
+    <index_tablespace />
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>${POSTGRES_DB_PORT}</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>RNMONITOR</name>
+    <server>localhost</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>rnmonitor</database>
+    <port>5432</port>
+    <username>postgres</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb79ce108fc0fc8e</password>
+    <servername />
+    <data_tablespace />
+    <index_tablespace />
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>5432</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <order>
+    <hop>
+      <from>JSON Types</from>
+      <to>Select values</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Pol. Type GET</from>
+      <to>JSON Types</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Days</from>
+      <to>New day</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>month</from>
+      <to>new month</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>new month</from>
+      <to>month Name</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>New day</from>
+      <to>Day Name</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>month Name</from>
+      <to>Select month</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Day Name</from>
+      <to>Select day</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values</from>
+      <to>Sort </to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Masks</from>
+      <to>Join </to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select month</from>
+      <to>Join </to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select day</from>
+      <to>Join </to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Join </from>
+      <to>Script</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Script</from>
+      <to>Select v</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort </from>
+      <to>Masks</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select v</from>
+      <to>Sort Occ.</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort Occ.</from>
+      <to>occupation</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Variables Set</from>
+      <to>Pol. Type GET</to>
+      <enabled>Y</enabled>
+    </hop>
+  </order>
+  <step>
+    <name>Day Name</name>
+    <type>Formula</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <formula>
+      <field_name>dayName</field_name>
+      <formula_string>TRIM(MID("         Monday   Tuesday  WednesdayThursday Friday   Saturday Sunday";([newday])*9+1; 9))</formula_string>
+      <value_type>String</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <replace_field />
+    </formula>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>624</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Days</name>
+    <type>RowGenerator</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>day</name>
+        <type>Integer</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif>1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <limit>7</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms>5000</interval_in_ms>
+    <row_time_field>now</row_time_field>
+    <last_time_field>FiveSecondsAgo</last_time_field>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>400</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>JSON Types</name>
+    <type>JsonInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <include>N</include>
+    <include_field />
+    <rownum>N</rownum>
+    <addresultfile>N</addresultfile>
+    <readurl>N</readurl>
+    <removeSourceField>N</removeSourceField>
+    <IsIgnoreEmptyFile>Y</IsIgnoreEmptyFile>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <ignoreMissingPath>Y</ignoreMissingPath>
+    <rownum_field />
+    <file>
+      <name />
+      <filemask />
+      <exclude_filemask />
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <fields>
+      <field>
+        <name>id</name>
+        <path>$.._id</path>
+        <type>None</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>name</name>
+        <path>$..name</path>
+        <type>None</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>polygon_id</name>
+        <path>$..polygon_id</path>
+        <type>None</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>startTime</name>
+        <path>$..startTime</path>
+        <type>None</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>endTime</name>
+        <path>$..endTime</path>
+        <type>None</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>dayMask</name>
+        <path>$..weekDaysMask</path>
+        <type>Binary</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>monthmask</name>
+        <path>$..yearMonthsMask</path>
+        <type>Binary</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>userid</name>
+        <path>$..userId</path>
+        <type>None</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+    </fields>
+    <limit>0</limit>
+    <IsInFields>Y</IsInFields>
+    <IsAFile>N</IsAFile>
+    <valueField>occupation</valueField>
+    <shortFileFieldName />
+    <pathFieldName />
+    <hiddenFieldName />
+    <lastModificationTimeFieldName />
+    <uriNameFieldName />
+    <rootUriNameFieldName />
+    <extensionFieldName />
+    <sizeFieldName />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Join </name>
+    <type>JoinRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <cache_size>500</cache_size>
+    <main />
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue />
+        <function>=</function>
+        <rightvalue />
+      </condition>
+    </compare>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>848</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Masks</name>
+    <type>StringCut</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>dayMask</in_stream_name>
+        <out_stream_name>mon</out_stream_name>
+        <cut_from>0</cut_from>
+        <cut_to>1</cut_to>
+      </field>
+      <field>
+        <in_stream_name>dayMask</in_stream_name>
+        <out_stream_name>tue</out_stream_name>
+        <cut_from>1</cut_from>
+        <cut_to>2</cut_to>
+      </field>
+      <field>
+        <in_stream_name>dayMask</in_stream_name>
+        <out_stream_name>wed</out_stream_name>
+        <cut_from>2</cut_from>
+        <cut_to>3</cut_to>
+      </field>
+      <field>
+        <in_stream_name>dayMask</in_stream_name>
+        <out_stream_name>thu</out_stream_name>
+        <cut_from>3</cut_from>
+        <cut_to>4</cut_to>
+      </field>
+      <field>
+        <in_stream_name>dayMask</in_stream_name>
+        <out_stream_name>fri</out_stream_name>
+        <cut_from>4</cut_from>
+        <cut_to>5</cut_to>
+      </field>
+      <field>
+        <in_stream_name>dayMask</in_stream_name>
+        <out_stream_name>sat</out_stream_name>
+        <cut_from>5</cut_from>
+        <cut_to>6</cut_to>
+      </field>
+      <field>
+        <in_stream_name>dayMask</in_stream_name>
+        <out_stream_name>sun</out_stream_name>
+        <cut_from>6</cut_from>
+        <cut_to>7</cut_to>
+      </field>
+      <field>
+        <in_stream_name>monthmask</in_stream_name>
+        <out_stream_name>JAN</out_stream_name>
+        <cut_from>0</cut_from>
+        <cut_to>1</cut_to>
+      </field>
+      <field>
+        <in_stream_name>monthmask</in_stream_name>
+        <out_stream_name>FEB</out_stream_name>
+        <cut_from>1</cut_from>
+        <cut_to>2</cut_to>
+      </field>
+      <field>
+        <in_stream_name>monthmask</in_stream_name>
+        <out_stream_name>MAR</out_stream_name>
+        <cut_from>2</cut_from>
+        <cut_to>3</cut_to>
+      </field>
+      <field>
+        <in_stream_name>monthmask</in_stream_name>
+        <out_stream_name>APR</out_stream_name>
+        <cut_from>3</cut_from>
+        <cut_to>4</cut_to>
+      </field>
+      <field>
+        <in_stream_name>monthmask</in_stream_name>
+        <out_stream_name>MAY</out_stream_name>
+        <cut_from>4</cut_from>
+        <cut_to>5</cut_to>
+      </field>
+      <field>
+        <in_stream_name>monthmask</in_stream_name>
+        <out_stream_name>JUN</out_stream_name>
+        <cut_from>5</cut_from>
+        <cut_to>6</cut_to>
+      </field>
+      <field>
+        <in_stream_name>monthmask</in_stream_name>
+        <out_stream_name>JUL</out_stream_name>
+        <cut_from>6</cut_from>
+        <cut_to>7</cut_to>
+      </field>
+      <field>
+        <in_stream_name>monthmask</in_stream_name>
+        <out_stream_name>AUG</out_stream_name>
+        <cut_from>7</cut_from>
+        <cut_to>8</cut_to>
+      </field>
+      <field>
+        <in_stream_name>monthmask</in_stream_name>
+        <out_stream_name>SEP</out_stream_name>
+        <cut_from>8</cut_from>
+        <cut_to>9</cut_to>
+      </field>
+      <field>
+        <in_stream_name>monthmask</in_stream_name>
+        <out_stream_name>OCT</out_stream_name>
+        <cut_from>9</cut_from>
+        <cut_to>10</cut_to>
+      </field>
+      <field>
+        <in_stream_name>monthmask</in_stream_name>
+        <out_stream_name>NOV</out_stream_name>
+        <cut_from>10</cut_from>
+        <cut_to>11</cut_to>
+      </field>
+      <field>
+        <in_stream_name>monthmask</in_stream_name>
+        <out_stream_name>DEC</out_stream_name>
+        <cut_from>11</cut_from>
+        <cut_to>12</cut_to>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>736</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>New day</name>
+    <type>Sequence</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <valuename>newday</valuename>
+    <use_database>N</use_database>
+    <connection>RNMONITOR</connection>
+    <schema />
+    <seqname>SEQ_</seqname>
+    <use_counter>Y</use_counter>
+    <counter_name />
+    <start_at>1</start_at>
+    <increment_by>1</increment_by>
+    <max_value>999999999</max_value>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>496</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Pol. Type GET</name>
+    <type>Rest</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <applicationType>JSON</applicationType>
+    <method>GET</method>
+    <url>http://localhost:3000/polygontype</url>
+    <urlInField>Y</urlInField>
+    <dynamicMethod>N</dynamicMethod>
+    <methodFieldName />
+    <urlField>UrlOccupation</urlField>
+    <bodyField />
+    <httpLogin />
+    <httpPassword>Encrypted </httpPassword>
+    <proxyHost />
+    <proxyPort />
+    <preemptive>N</preemptive>
+    <trustStoreFile />
+    <trustStorePassword>Encrypted </trustStorePassword>
+    <headers>
+      <header>
+        <field>Authorization</field>
+        <name>Authorization</name>
+      </header>
+    </headers>
+    <parameters>
+      </parameters>
+    <matrixParameters>
+      </matrixParameters>
+    <result>
+      <name>occupation</name>
+      <code />
+      <response_time />
+      <response_header />
+    </result>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>336</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Script</name>
+    <type>ScriptValueMod</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>//Script here
+
+var occupied=0;
+if(monthName=="January"){
+	if(dayName=="Monday"){
+		occupied=parseInt(mon)*parseInt(JAN);
+	}
+	if(dayName=="Tuesday"){
+		occupied=parseInt(tue)*parseInt(JAN);
+	}
+	if(dayName=="Wednesday"){
+		occupied=parseInt(wed)*parseInt(JAN);
+	}
+	if(dayName=="Thursday"){
+		occupied=parseInt(thu)*parseInt(JAN);
+	}
+	if(dayName=="Friday"){
+		occupied=parseInt(fri)*parseInt(JAN);
+	}
+	if(dayName=="Saturday"){
+		occupied=parseInt(sat)*parseInt(JAN);
+	}
+	if(dayName=="Sunday"){
+		occupied=parseInt(sun)*parseInt(JAN);
+	}		
+}if(monthName=="February"){
+	if(dayName=="Monday"){
+		occupied=parseInt(mon)*parseInt(FEB);
+	}
+	if(dayName=="Tuesday"){
+		occupied=parseInt(tue)*parseInt(FEB);
+	}
+	if(dayName=="Wednesday"){
+		occupied=parseInt(wed)*parseInt(FEB);
+	}
+	if(dayName=="Thursday"){
+		occupied=parseInt(thu)*parseInt(FEB);
+	}
+	if(dayName=="Friday"){
+		occupied=parseInt(fri)*parseInt(FEB);
+	}
+	if(dayName=="Saturday"){
+		occupied=parseInt(sat)*parseInt(FEB);
+	}
+	if(dayName=="Sunday"){
+		occupied=parseInt(sun)*parseInt(FEB);
+	}		
+}if(monthName=="March"){
+	if(dayName=="Monday"){
+		occupied=parseInt(mon)*parseInt(MAR);
+	}
+	if(dayName=="Tuesday"){
+		occupied=parseInt(tue)*parseInt(MAR);
+	}
+	if(dayName=="Wednesday"){
+		occupied=parseInt(wed)*parseInt(MAR);
+	}
+	if(dayName=="Thursday"){
+		occupied=parseInt(thu)*parseInt(MAR);
+	}
+	if(dayName=="Friday"){
+		occupied=parseInt(fri)*parseInt(MAR);
+	}
+	if(dayName=="Saturday"){
+		occupied=parseInt(sat)*parseInt(MAR);
+	}
+	if(dayName=="Sunday"){
+		occupied=parseInt(sun)*parseInt(MAR);
+	}		
+}if(monthName=="April"){
+	if(dayName=="Monday"){
+		occupied=parseInt(mon)*parseInt(APR);
+	}
+	if(dayName=="Tuesday"){
+		occupied=parseInt(tue)*parseInt(APR);
+	}
+	if(dayName=="Wednesday"){
+		occupied=parseInt(wed)*parseInt(APR);
+	}
+	if(dayName=="Thursday"){
+		occupied=parseInt(thu)*parseInt(APR);
+	}
+	if(dayName=="Friday"){
+		occupied=parseInt(fri)*parseInt(APR);
+	}
+	if(dayName=="Saturday"){
+		occupied=parseInt(sat)*parseInt(APR);
+	}
+	if(dayName=="Sunday"){
+		occupied=parseInt(sun)*parseInt(APR);
+	}		
+}if(monthName=="May"){
+	if(dayName=="Monday"){
+		occupied=parseInt(mon)*parseInt(MAY);
+	}
+	if(dayName=="Tuesday"){
+		occupied=parseInt(tue)*parseInt(MAY);
+	}
+	if(dayName=="Wednesday"){
+		occupied=parseInt(wed)*parseInt(MAY);
+	}
+	if(dayName=="Thursday"){
+		occupied=parseInt(thu)*parseInt(MAY);
+	}
+	if(dayName=="Friday"){
+		occupied=parseInt(fri)*parseInt(MAY);
+	}
+	if(dayName=="Saturday"){
+		occupied=parseInt(sat)*parseInt(MAY);
+	}
+	if(dayName=="Sunday"){
+		occupied=parseInt(sun)*parseInt(MAY);
+	}		
+}if(monthName=="June"){
+	if(dayName=="Monday"){
+		occupied=parseInt(mon)*parseInt(JUN);
+	}
+	if(dayName=="Tuesday"){
+		occupied=parseInt(tue)*parseInt(JUN);
+	}
+	if(dayName=="Wednesday"){
+		occupied=parseInt(wed)*parseInt(JUN);
+	}
+	if(dayName=="Thursday"){
+		occupied=parseInt(thu)*parseInt(JUN);
+	}
+	if(dayName=="Friday"){
+		occupied=parseInt(fri)*parseInt(JUN);
+	}
+	if(dayName=="Saturday"){
+		occupied=parseInt(sat)*parseInt(JUN);
+	}
+	if(dayName=="Sunday"){
+		occupied=parseInt(sun)*parseInt(JUN);
+	}		
+}if(monthName=="July"){
+	if(dayName=="Monday"){
+		occupied=parseInt(mon)*parseInt(JUL);
+	}
+	if(dayName=="Tuesday"){
+		occupied=parseInt(tue)*parseInt(JUL);
+	}
+	if(dayName=="Wednesday"){
+		occupied=parseInt(wed)*parseInt(JUL);
+	}
+	if(dayName=="Thursday"){
+		occupied=parseInt(thu)*parseInt(JUL);
+	}
+	if(dayName=="Friday"){
+		occupied=parseInt(fri)*parseInt(JUL);
+	}
+	if(dayName=="Saturday"){
+		occupied=parseInt(sat)*parseInt(JUL);
+	}
+	if(dayName=="Sunday"){
+		occupied=parseInt(sun)*parseInt(JUL);
+	}		
+}if(monthName=="August"){
+	if(dayName=="Monday"){
+		occupied=parseInt(mon)*parseInt(AUG);
+	}
+	if(dayName=="Tuesday"){
+		occupied=parseInt(tue)*parseInt(AUG);
+	}
+	if(dayName=="Wednesday"){
+		occupied=parseInt(wed)*parseInt(AUG);
+	}
+	if(dayName=="Thursday"){
+		occupied=parseInt(thu)*parseInt(AUG);
+	}
+	if(dayName=="Friday"){
+		occupied=parseInt(fri)*parseInt(AUG);
+	}
+	if(dayName=="Saturday"){
+		occupied=parseInt(sat)*parseInt(AUG);
+	}
+	if(dayName=="Sunday"){
+		occupied=parseInt(sun)*parseInt(AUG);
+	}		
+}if(monthName=="September"){
+	if(dayName=="Monday"){
+		occupied=parseInt(mon)*parseInt(SEP);
+	}
+	if(dayName=="Tuesday"){
+		occupied=parseInt(tue)*parseInt(SEP);
+	}
+	if(dayName=="Wednesday"){
+		occupied=parseInt(wed)*parseInt(SEP);
+	}
+	if(dayName=="Thursday"){
+		occupied=parseInt(thu)*parseInt(SEP);
+	}
+	if(dayName=="Friday"){
+		occupied=parseInt(fri)*parseInt(SEP);
+	}
+	if(dayName=="Saturday"){
+		occupied=parseInt(sat)*parseInt(SEP);
+	}
+	if(dayName=="Sunday"){
+		occupied=parseInt(sun)*parseInt(SEP);
+	}		
+}if(monthName=="October"){
+	if(dayName=="Monday"){
+		occupied=parseInt(mon)*parseInt(OCT);
+	}
+	if(dayName=="Tuesday"){
+		occupied=parseInt(tue)*parseInt(OCT);
+	}
+	if(dayName=="Wednesday"){
+		occupied=parseInt(wed)*parseInt(OCT);
+	}
+	if(dayName=="Thursday"){
+		occupied=parseInt(thu)*parseInt(OCT);
+	}
+	if(dayName=="Friday"){
+		occupied=parseInt(fri)*parseInt(OCT);
+	}
+	if(dayName=="Saturday"){
+		occupied=parseInt(sat)*parseInt(OCT);
+	}
+	if(dayName=="Sunday"){
+		occupied=parseInt(sun)*parseInt(OCT);
+	}		
+}if(monthName=="November"){
+	if(dayName=="Monday"){
+		occupied=parseInt(mon)*parseInt(NOV);
+	}
+	if(dayName=="Tuesday"){
+		occupied=parseInt(tue)*parseInt(NOV);
+	}
+	if(dayName=="Wednesday"){
+		occupied=parseInt(wed)*parseInt(NOV);
+	}
+	if(dayName=="Thursday"){
+		occupied=parseInt(thu)*parseInt(NOV);
+	}
+	if(dayName=="Friday"){
+		occupied=parseInt(fri)*parseInt(NOV);
+	}
+	if(dayName=="Saturday"){
+		occupied=parseInt(sat)*parseInt(NOV);
+	}
+	if(dayName=="Sunday"){
+		occupied=parseInt(sun)*parseInt(NOV);
+	}		
+}if(monthName=="December"){
+	if(dayName=="Monday"){
+		occupied=parseInt(mon)*parseInt(DEC);
+	}
+	if(dayName=="Tuesday"){
+		occupied=parseInt(tue)*parseInt(DEC);
+	}
+	if(dayName=="Wednesday"){
+		occupied=parseInt(wed)*parseInt(DEC);
+	}
+	if(dayName=="Thursday"){
+		occupied=parseInt(thu)*parseInt(DEC);
+	}
+	if(dayName=="Friday"){
+		occupied=parseInt(fri)*parseInt(DEC);
+	}
+	if(dayName=="Saturday"){
+		occupied=parseInt(sat)*parseInt(DEC);
+	}
+	if(dayName=="Sunday"){
+		occupied=parseInt(sun)*parseInt(DEC);
+	}		
+}</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>occupied</name>
+        <rename>isopen</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>912</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select day</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>dayName</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>736</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select month</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>monthName</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>736</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select v</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>occupation_id</name>
+      </field>
+      <field>
+        <name>polygon_id</name>
+      </field>
+      <field>
+        <name>startTime</name>
+      </field>
+      <field>
+        <name>endTime</name>
+      </field>
+      <field>
+        <name>monthName</name>
+      </field>
+      <field>
+        <name>dayName</name>
+      </field>
+      <field>
+        <name>isopen</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>isopen</name>
+        <rename>isopen</rename>
+        <type>Boolean</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>992</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>id</name>
+        <rename>occupation_id</rename>
+      </field>
+      <field>
+        <name>polygon_id</name>
+      </field>
+      <field>
+        <name>startTime</name>
+      </field>
+      <field>
+        <name>endTime</name>
+      </field>
+      <field>
+        <name>userid</name>
+      </field>
+      <field>
+        <name>monthmask</name>
+      </field>
+      <field>
+        <name>dayMask</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>monthmask</name>
+        <rename>monthmask</rename>
+        <type>String</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>dayMask</name>
+        <rename>dayMask</rename>
+        <type>String</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>560</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort </name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>polygon_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>656</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort Occ.</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>occupation_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>polygon_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1072</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Variables Set</name>
+    <type>GetVariable</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>Authorization</name>
+        <variable>${TOKEN}</variable>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>UrlOccupation</name>
+        <variable>${BASE_URL}occupationprofile</variable>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>208</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>month</name>
+    <type>RowGenerator</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>month</name>
+        <type>Integer</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif>1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <limit>12</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms>5000</interval_in_ms>
+    <row_time_field>now</row_time_field>
+    <last_time_field>FiveSecondsAgo</last_time_field>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>400</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>month Name</name>
+    <type>Formula</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <formula>
+      <field_name>monthName</field_name>
+      <formula_string>TRIM(MID("         January  February March    April    May      June     July     August   SeptemberOctober  November December "; 
+([newmonth])*9+1; 9))</formula_string>
+      <value_type>String</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <replace_field />
+    </formula>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>624</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>new month</name>
+    <type>Sequence</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <valuename>newmonth</valuename>
+    <use_database>N</use_database>
+    <connection>RNMONITOR</connection>
+    <schema />
+    <seqname>SEQ_</seqname>
+    <use_counter>Y</use_counter>
+    <counter_name />
+    <start_at>1</start_at>
+    <increment_by>1</increment_by>
+    <max_value>999999999</max_value>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>496</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>occupation</name>
+    <type>TableOutput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>CONN8</connection>
+    <schema />
+    <table>occupation</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>N</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field />
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field />
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field />
+    <fields>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1168</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step_error_handling>
+  </step_error_handling>
+  <slave-step-copy-partition-distribution>
+  </slave-step-copy-partition-distribution>
+  <slave_transformation>N</slave_transformation>
+</transformation>
