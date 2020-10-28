@@ -16,7 +16,7 @@ RUN wget --progress=dot:giga http://downloads.sourceforge.net/project/pentaho/Da
 # Aditional Drivers
 WORKDIR $KETTLE_HOME
 
-RUN  wget --progress=dot:giga https://jdbc.postgresql.org/download/postgresql-{POSTGRESQL_DRIVER_VERSION}.jre6.jar \
+RUN  wget --progress=dot:giga https://jdbc.postgresql.org/download/postgresql-${POSTGRESQL_DRIVER_VERSION}.jre6.jar \
     && rm -f lib/postgre*.jar \
     && mv *.jar lib/. \
     && wget https://downloads.sourceforge.net/project/jtds/jtds/1.3.1/jtds-1.3.1-dist.zip \
