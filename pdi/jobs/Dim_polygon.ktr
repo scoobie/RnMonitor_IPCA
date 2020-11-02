@@ -742,7 +742,7 @@ if(PolygonTypeName=="Compartment")
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1040</xloc>
+      <xloc>1024</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1054,7 +1054,7 @@ WHERE T.polygon_tk=sub.pol
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1152</xloc>
+      <xloc>1120</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1109,7 +1109,7 @@ WHERE T.polygon_tk=sub.pol
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
+      <xloc>224</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1164,7 +1164,7 @@ WHERE T.polygon_tk=sub.pol
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
+      <xloc>224</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1424,7 +1424,7 @@ WHERE T.polygon_tk=sub.pol
       </output>
     </remotesteps>
     <GUI>
-      <xloc>64</xloc>
+      <xloc>96</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1474,7 +1474,7 @@ WHERE T.polygon_tk=sub.pol
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
+      <xloc>96</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
