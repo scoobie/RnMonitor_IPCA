@@ -1,37 +1,33 @@
 version: '3.1'
 
 services:
-  postgres:
+  ${POSTGRES_SERVICE}:
     image: postgres:12-alpine
-    container_name: postgres_rn
+    container_name: ${POSTGRES_CONTAINER_NAME}
     ports:
-      - "15432:5432"
-    environment:
-      POSTGRES_USER_FILE: /run/secrets/db-username
-      POSTGRES_PASSWORD_FILE: /run/secrets/db-password
-      POSTGRES_DB_FILE: /run/secrets/db-dbname
+      - ${POSTGRES_PORT}
     volumes:
       - /home/RnMonitor_IPCA/data/pgdata:/var/lib/postgresql/data
-    secrets:
-      - db-username
-      - db-password
-      - db-dbname
     networks:
       - rnetwork
     restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE_NAME}
   olap:
-    container_name: mondrian_rn
+    container_name: ${MONDRIAN_CONTAINER_NAME}
     image: mondrianrn
     build:
       dockerfile: Dockerfile
       context: ./mondrian
     ports:
-      - "8081:80"
+      - ${OLAP_PORT}
     networks:
       - rnetwork
     restart: unless-stopped
   pdi:
-    container_name: pdi_rn
+    container_name: ${PDI_CONTAINER_NAME}
     image: pdirn
     build:
       dockerfile: Dockerfile
@@ -42,10 +38,4 @@ services:
 networks:
   rnetwork:
     driver: bridge
-secrets:
-  db-username:
-    file: /home/RnMonitor_IPCA/secrets/DB_USERNAME
-  db-password:
-    file: /home/RnMonitor_IPCA/secrets/DB_PASSWORD
-  db-dbname:
-    file: /home/RnMonitor_IPCA/secrets/DB_DATABASE_NAME
+

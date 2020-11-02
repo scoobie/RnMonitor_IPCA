@@ -2,7 +2,7 @@
 
 Docker()
 {
-docker container run --network=rnmonitor_ipca_rnetwork --rm -v $(pwd):/jobs pdirn runj ETL/ETL_RNMONITOR.kjb
+docker container run --network=rnmonitor_ipca_rnetwork --rm -v $(pwd):/jobs pdirn runj jobs/ETL_RNMONITOR.kjb
 }
 
 Checking()

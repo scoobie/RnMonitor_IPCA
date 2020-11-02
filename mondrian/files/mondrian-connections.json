@@ -1,9 +1,9 @@
 {
   "RnMonitorMeasurements": {
     "JdbcDriver": "org.postgresql.Driver",
-    "Jdbc": "jdbc:postgresql://{CONTAINER_NAME}/{POSTGRES_NAME}",
-    "JdbcUser": "{POSTGRES_USER}",
-    "JdbcPassword": "{POSTGRES_PASSWORD}",
+    "Jdbc": "jdbc:postgresql://postgres_rn/rnmonitor",
+    "JdbcUser": "{DB_USERNAME}",
+    "JdbcPassword": "{DB_PASSWORD}",
     "Catalog": "/rn_schema.xml",
     "Description": "RnMonitor Cube",
     "IsDemo": false
