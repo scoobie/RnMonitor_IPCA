@@ -431,7 +431,7 @@
     <created_date>2020/09/09 09:10:39.858</created_date>
     <modified_user>-</modified_user>
     <modified_date>2020/09/09 09:10:39.858</modified_date>
-    <key_for_session_key />
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -539,11 +539,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>JSON </from>
-      <to>Decimal Point</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Readings</from>
       <to>Sort</to>
       <enabled>Y</enabled>
@@ -606,11 +601,6 @@
     <hop>
       <from>Fact Values</from>
       <to>Fact</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>Decimal Point</from>
-      <to>Filter rows</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -623,9 +613,123 @@
       <to>No readings</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>JSON </from>
+      <to>Select values</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values</from>
+      <to>Filter rows</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
-    <name>Day info</name>
+    <name>Body JSON</name>
+    <type>ScriptValueMod</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>
+var json = {
+	"dateStart" :dateStart.toString(),
+	"dateEnd" :dateEnd.toString(),
+	"groupBy": GROUP_BY
+}
+
+var json = JSON.stringify(json);</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>json</name>
+        <rename>json</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Calculator</name>
+    <type>Calculator</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <calculation>
+      <field_name>ds</field_name>
+      <calc_type>ADD_HOURS</calc_type>
+      <field_a>lastDate</field_a>
+      <field_b>deltaAfter</field_b>
+      <field_c />
+      <value_type>None</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask />
+      <decimal_symbol />
+      <grouping_symbol />
+      <currency_symbol />
+    </calculation>
+    <calculation>
+      <field_name>df</field_name>
+      <calc_type>ADD_HOURS</calc_type>
+      <field_a>finalDate</field_a>
+      <field_b>deltaBefore</field_b>
+      <field_c />
+      <value_type>None</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask />
+      <decimal_symbol />
+      <grouping_symbol />
+      <currency_symbol />
+    </calculation>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>752</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Date</name>
     <type>DBLookup</type>
     <description />
     <distribute>Y</distribute>
@@ -646,112 +750,38 @@
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
-        <name>date_fk</name>
-        <field>date_id</field>
+        <name>y</name>
+        <field>year</field>
         <condition>=</condition>
         <name2 />
       </key>
-      <value>
-        <name>year</name>
-        <rename>fyear</rename>
-        <default />
-        <type>None</type>
-      </value>
-      <value>
-        <name>monthofyear</name>
-        <rename>fmonth</rename>
-        <default />
-        <type>None</type>
-      </value>
-      <value>
-        <name>dayofmonth</name>
-        <rename>fday</rename>
-        <default />
-        <type>None</type>
-      </value>
-    </lookup>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1072</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Last Fact</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>CONNF</connection>
-    <sql>SELECT time_fk,date_fk,fact_id from fact_measurement
-ORDER BY fact_id DESC
-LIMIT 1</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1184</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>hour info</name>
-    <type>DBLookup</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>CONNF</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema />
-      <table>dim_time</table>
-      <orderby />
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
       <key>
-        <name>time_fk</name>
-        <field>time_id</field>
+        <name>m</name>
+        <field>monthofyear</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>d</name>
+        <field>dayofmonth</field>
         <condition>=</condition>
         <name2 />
       </key>
       <value>
-        <name>hour</name>
-        <rename>fhour</rename>
+        <name>date_id</name>
+        <rename>date_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>dayname</name>
+        <rename>daytemp</rename>
         <default />
         <type>None</type>
       </value>
       <value>
-        <name>minute</name>
-        <rename>fmin</rename>
+        <name>monthname</name>
+        <rename>monthtemp</rename>
         <default />
         <type>None</type>
       </value>
@@ -764,8 +794,8 @@ LIMIT 1</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>976</xloc>
-      <yloc>96</yloc>
+      <xloc>592</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -845,13 +875,13 @@ var deltaAfter=1;
     </remotesteps>
     <GUI>
       <xloc>864</xloc>
-      <yloc>96</yloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Calculator</name>
-    <type>Calculator</type>
+    <name>Day info</name>
+    <type>DBLookup</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -860,36 +890,41 @@ var deltaAfter=1;
       <method>none</method>
       <schema_name />
     </partitioning>
-    <calculation>
-      <field_name>ds</field_name>
-      <calc_type>ADD_HOURS</calc_type>
-      <field_a>lastDate</field_a>
-      <field_b>deltaAfter</field_b>
-      <field_c />
-      <value_type>None</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask />
-      <decimal_symbol />
-      <grouping_symbol />
-      <currency_symbol />
-    </calculation>
-    <calculation>
-      <field_name>df</field_name>
-      <calc_type>ADD_HOURS</calc_type>
-      <field_a>finalDate</field_a>
-      <field_b>deltaBefore</field_b>
-      <field_c />
-      <value_type>None</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask />
-      <decimal_symbol />
-      <grouping_symbol />
-      <currency_symbol />
-    </calculation>
+    <connection>CONNF</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema />
+      <table>dim_date</table>
+      <orderby />
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>date_fk</name>
+        <field>date_id</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>year</name>
+        <rename>fyear</rename>
+        <default />
+        <type>None</type>
+      </value>
+      <value>
+        <name>monthofyear</name>
+        <rename>fmonth</rename>
+        <default />
+        <type>None</type>
+      </value>
+      <value>
+        <name>dayofmonth</name>
+        <rename>fday</rename>
+        <default />
+        <type>None</type>
+      </value>
+    </lookup>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -898,13 +933,162 @@ var deltaAfter=1;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>752</xloc>
-      <yloc>96</yloc>
+      <xloc>1072</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Start/End Time</name>
+    <name>Fact</name>
+    <type>TableOutput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>CONNF</connection>
+    <schema />
+    <table>fact_measurement</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>N</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field />
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field />
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field />
+    <fields>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1184</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Fact Values</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>polygon_tk</name>
+        <rename>polygon_fk</rename>
+      </field>
+      <field>
+        <name>time_id</name>
+        <rename>time_fk</rename>
+      </field>
+      <field>
+        <name>date_id</name>
+        <rename>date_fk</rename>
+      </field>
+      <field>
+        <name>thi_occ_id</name>
+        <rename>thi_occ_fk</rename>
+      </field>
+      <field>
+        <name>sensorId</name>
+        <rename>apikey</rename>
+      </field>
+      <field>
+        <name>temperature</name>
+      </field>
+      <field>
+        <name>radon</name>
+      </field>
+      <field>
+        <name>humidity</name>
+      </field>
+      <field>
+        <name>pressure</name>
+      </field>
+      <field>
+        <name>co2</name>
+      </field>
+      <field>
+        <name>rn_kpi_pt</name>
+      </field>
+      <field>
+        <name>rn_kpi_who</name>
+      </field>
+      <field>
+        <name>thi</name>
+        <rename>thi_value</rename>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1088</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Filter rows</name>
+    <type>FilterRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <send_true_to>Radon Limit</send_true_to>
+    <send_false_to>No readings</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>sensorId</leftvalue>
+        <function>IS NOT NULL</function>
+        <rightvalue />
+      </condition>
+    </compare>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ISOPEN</name>
     <type>ScriptValueMod</type>
     <description />
     <distribute>Y</distribute>
@@ -922,181 +1106,39 @@ var deltaAfter=1;
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>//Script here
 
-var dateStart;
-var dateEnd;
+var isopen;
+var thi;
 
-dateStart=ds.getTime();
-dateEnd=df.getTime();</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>dateStart</name>
-        <rename>dateStart</rename>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>dateEnd</name>
-        <rename>dateEnd</rename>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>640</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Variables</name>
-    <type>GetVariable</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>Authorization</name>
-        <variable>${TOKEN}</variable>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>URLMeasurement</name>
-        <variable>${BASE_URL}measurement/get</variable>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>GROUP_BY</name>
-        <variable>${GROUP_BY}</variable>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>448</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Times</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>dateStart</name>
-        <rename />
-      </field>
-      <field>
-        <name>dateEnd</name>
-        <rename />
-      </field>
-      <field>
-        <name>df</name>
-        <rename />
-      </field>
-      <field>
-        <name>ds</name>
-        <rename />
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>528</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Body JSON</name>
-    <type>ScriptValueMod</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>
-var json = {
-	"dateStart" :dateStart.toString(),
-	"dateEnd" :dateEnd.toString(),
-	"groupBy": GROUP_BY
+if (isopentemp==null){
+	isopen=false;
+}
+else if (isopentemp==false){
+	isopen=false;
+}else if (isopentemp==true){
+	isopen=true;
 }
 
-var json = JSON.stringify(json);</jsScript_script>
+
+if(thi_values==null){
+	thi=0;
+}else{
+	thi=thi_values
+}</jsScript_script>
       </jsScript>
     </jsScripts>
     <fields>
       <field>
-        <name>json</name>
-        <rename>json</rename>
-        <type>String</type>
+        <name>isopen</name>
+        <rename>isopen</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>thi</name>
+        <rename>thi</rename>
+        <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
@@ -1110,8 +1152,288 @@ var json = JSON.stringify(json);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>352</xloc>
-      <yloc>96</yloc>
+      <xloc>912</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>JSON </name>
+    <type>JsonInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <include>N</include>
+    <include_field />
+    <rownum>N</rownum>
+    <addresultfile>N</addresultfile>
+    <readurl>N</readurl>
+    <removeSourceField>N</removeSourceField>
+    <IsIgnoreEmptyFile>Y</IsIgnoreEmptyFile>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <ignoreMissingPath>Y</ignoreMissingPath>
+    <rownum_field />
+    <file>
+      <name />
+      <filemask />
+      <exclude_filemask />
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <fields>
+      <field>
+        <name>time</name>
+        <path>$..time</path>
+        <type>Date</type>
+        <format>yyyy-MM-dd'T'HH:mm:ss.SSSXXX</format>
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>T</name>
+        <path>$..T</path>
+        <type>Number</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>Rn</name>
+        <path>$..Rn</path>
+        <type>Number</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>H</name>
+        <path>$..H</path>
+        <type>Number</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>P</name>
+        <path>$..P</path>
+        <type>Number</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>CO2</name>
+        <path>$..CO2</path>
+        <type>Number</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>sensorId</name>
+        <path>$..sensor_id</path>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+    </fields>
+    <limit>0</limit>
+    <IsInFields>Y</IsInFields>
+    <IsAFile>N</IsAFile>
+    <valueField>mesurement</valueField>
+    <shortFileFieldName />
+    <pathFieldName />
+    <hiddenFieldName />
+    <lastModificationTimeFieldName />
+    <uriNameFieldName />
+    <rootUriNameFieldName />
+    <extensionFieldName />
+    <sizeFieldName />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>176</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Last Fact</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>CONNF</connection>
+    <sql>SELECT time_fk,date_fk,fact_id from fact_measurement
+ORDER BY fact_id DESC
+LIMIT 1</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1184</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>No readings</name>
+    <type>Dummy</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>272</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Occupation</name>
+    <type>DBLookup</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>CONNF</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema />
+      <table>occupation</table>
+      <orderby />
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>polygon_id</name>
+        <field>polygon_id</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>daytemp</name>
+        <field>dayname</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>monthtemp</name>
+        <field>monthname</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>hhmm</name>
+        <field>starttime</field>
+        <condition>&lt;=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>hhmm</name>
+        <field>endtime</field>
+        <condition>&gt;=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>op</name>
+        <field>isopen</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>isopen</name>
+        <rename>isopentemp</rename>
+        <default />
+        <type>None</type>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1166,13 +1488,13 @@ var json = JSON.stringify(json);</jsScript_script>
     </remotesteps>
     <GUI>
       <xloc>256</xloc>
-      <yloc>96</yloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>JSON </name>
-    <type>JsonInput</type>
+    <name>Radon Limit</name>
+    <type>GetVariable</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -1181,106 +1503,11 @@ var json = JSON.stringify(json);</jsScript_script>
       <method>none</method>
       <schema_name />
     </partitioning>
-    <include>N</include>
-    <include_field />
-    <rownum>N</rownum>
-    <addresultfile>N</addresultfile>
-    <readurl>N</readurl>
-    <removeSourceField>N</removeSourceField>
-    <IsIgnoreEmptyFile>Y</IsIgnoreEmptyFile>
-    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
-    <ignoreMissingPath>Y</ignoreMissingPath>
-    <rownum_field />
-    <file>
-      <name />
-      <filemask />
-      <exclude_filemask />
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
     <fields>
       <field>
-        <name>time</name>
-        <path>$..time</path>
-        <type>Date</type>
-        <format>yyyy-MM-dd'T'HH:mm:ss.SSSXXX</format>
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>T</name>
-        <path>$..T</path>
-        <type>String</type>
-        <format>0.00</format>
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>Rn</name>
-        <path>$..Rn</path>
-        <type>String</type>
-        <format>0.00</format>
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>H</name>
-        <path>$..H</path>
-        <type>String</type>
-        <format>0.00</format>
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>P</name>
-        <path>$..P</path>
-        <type>String</type>
-        <format>0.00</format>
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>CO2</name>
-        <path>$..CO2</path>
-        <type>String</type>
-        <format>0.00</format>
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>sensorId</name>
-        <path>$..sensor_id</path>
-        <type>String</type>
+        <name>PT</name>
+        <variable>${RADON_PT_LIMIT}</variable>
+        <type>Number</type>
         <format />
         <currency />
         <decimal />
@@ -1288,100 +1515,18 @@ var json = JSON.stringify(json);</jsScript_script>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-    </fields>
-    <limit>0</limit>
-    <IsInFields>Y</IsInFields>
-    <IsAFile>N</IsAFile>
-    <valueField>mesurement</valueField>
-    <shortFileFieldName />
-    <pathFieldName />
-    <hiddenFieldName />
-    <lastModificationTimeFieldName />
-    <uriNameFieldName />
-    <rootUriNameFieldName />
-    <extensionFieldName />
-    <sizeFieldName />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>192</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Decimal Point</name>
-    <type>ReplaceString</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>CO2</in_stream_name>
-        <out_stream_name />
-        <use_regex>no</use_regex>
-        <replace_string>.</replace_string>
-        <replace_by_string>,</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string />
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
       </field>
       <field>
-        <in_stream_name>H</in_stream_name>
-        <out_stream_name />
-        <use_regex>no</use_regex>
-        <replace_string>.</replace_string>
-        <replace_by_string>,</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string />
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-      </field>
-      <field>
-        <in_stream_name>P</in_stream_name>
-        <out_stream_name />
-        <use_regex>no</use_regex>
-        <replace_string>.</replace_string>
-        <replace_by_string>,</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string />
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-      </field>
-      <field>
-        <in_stream_name>Rn</in_stream_name>
-        <out_stream_name />
-        <use_regex>no</use_regex>
-        <replace_string>.</replace_string>
-        <replace_by_string>,</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string />
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-      </field>
-      <field>
-        <in_stream_name>T</in_stream_name>
-        <out_stream_name />
-        <use_regex>no</use_regex>
-        <replace_string>.</replace_string>
-        <replace_by_string>,</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string />
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
+        <name>WHO</name>
+        <variable>${RADON_WHO_LIMIT}</variable>
+        <type>Number</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
       </field>
     </fields>
     <cluster_schema />
@@ -1393,7 +1538,7 @@ var json = JSON.stringify(json);</jsScript_script>
     </remotesteps>
     <GUI>
       <xloc>96</xloc>
-      <yloc>96</yloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1546,55 +1691,6 @@ var json = JSON.stringify(json);</jsScript_script>
     </GUI>
   </step>
   <step>
-    <name>Sort</name>
-    <type>SortRows</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory />
-    <compress>N</compress>
-    <compress_variable />
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>time</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>sensorId</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>272</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Set</name>
     <type>DBLookup</type>
     <description />
@@ -1654,7 +1750,113 @@ var json = JSON.stringify(json);</jsScript_script>
     </GUI>
   </step>
   <step>
-    <name>polygon</name>
+    <name>Sort</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>time</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>sensorId</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>272</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Start/End Time</name>
+    <type>ScriptValueMod</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>//Script here
+
+var dateStart;
+var dateEnd;
+
+dateStart=ds.getTime();
+dateEnd=df.getTime();</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>dateStart</name>
+        <rename>dateStart</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>dateEnd</name>
+        <rename>dateEnd</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>640</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>THI_OCC</name>
     <type>DBLookup</type>
     <description />
     <distribute>Y</distribute>
@@ -1670,19 +1872,37 @@ var json = JSON.stringify(json);</jsScript_script>
     <cache_size>0</cache_size>
     <lookup>
       <schema />
-      <table>dim_polygon</table>
+      <table>thi_occupation</table>
       <orderby />
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
-        <name>polygon_id</name>
-        <field>polygon_id</field>
+        <name>isopen</name>
+        <field>isoccupied</field>
         <condition>=</condition>
         <name2 />
       </key>
+      <key>
+        <name>thi</name>
+        <field>thi_lower_limit</field>
+        <condition>&lt;=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>thi</name>
+        <field>thi_upper_limit</field>
+        <condition>&gt;</condition>
+        <name2 />
+      </key>
       <value>
-        <name>polygon_tk</name>
-        <rename>polygon_tk</rename>
+        <name>thi_occ_id</name>
+        <rename>thi_occ_id</rename>
+        <default />
+        <type>None</type>
+      </value>
+      <value>
+        <name>thi_description</name>
+        <rename>thi_description</rename>
         <default />
         <type>None</type>
       </value>
@@ -1695,7 +1915,66 @@ var json = JSON.stringify(json);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>416</xloc>
+      <xloc>992</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Time</name>
+    <type>DBLookup</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>CONNF</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema />
+      <table>dim_time</table>
+      <orderby />
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>hr</name>
+        <field>hour</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>mi</name>
+        <field>minute</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>time_id</name>
+        <rename>time_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>hhmm</name>
+        <rename>hhmm</rename>
+        <default />
+        <type>None</type>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>656</xloc>
       <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1800,8 +2079,8 @@ var json = JSON.stringify(json);</jsScript_script>
     </GUI>
   </step>
   <step>
-    <name>Date</name>
-    <type>DBLookup</type>
+    <name>Times</name>
+    <type>SelectValues</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -1810,53 +2089,21 @@ var json = JSON.stringify(json);</jsScript_script>
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>CONNF</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema />
-      <table>dim_date</table>
-      <orderby />
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>y</name>
-        <field>year</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>m</name>
-        <field>monthofyear</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>d</name>
-        <field>dayofmonth</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>date_id</name>
-        <rename>date_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>dayname</name>
-        <rename>daytemp</rename>
-        <default />
-        <type>None</type>
-      </value>
-      <value>
-        <name>monthname</name>
-        <rename>monthtemp</rename>
-        <default />
-        <type>None</type>
-      </value>
-    </lookup>
+    <fields>
+      <field>
+        <name>dateStart</name>
+      </field>
+      <field>
+        <name>dateEnd</name>
+      </field>
+      <field>
+        <name>df</name>
+      </field>
+      <field>
+        <name>ds</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -1865,13 +2112,75 @@ var json = JSON.stringify(json);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>592</xloc>
-      <yloc>368</yloc>
+      <xloc>528</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Time</name>
+    <name>Variables</name>
+    <type>GetVariable</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>Authorization</name>
+        <variable>${TOKEN}</variable>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>URLMeasurement</name>
+        <variable>${BASE_URL}measurement/get</variable>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>GROUP_BY</name>
+        <variable>${GROUP_BY}</variable>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>hour info</name>
     <type>DBLookup</type>
     <description />
     <distribute>Y</distribute>
@@ -1892,26 +2201,20 @@ var json = JSON.stringify(json);</jsScript_script>
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
-        <name>hr</name>
-        <field>hour</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>mi</name>
-        <field>minute</field>
+        <name>time_fk</name>
+        <field>time_id</field>
         <condition>=</condition>
         <name2 />
       </key>
       <value>
-        <name>time_id</name>
-        <rename>time_id</rename>
+        <name>hour</name>
+        <rename>fhour</rename>
         <default />
-        <type>Integer</type>
+        <type>None</type>
       </value>
       <value>
-        <name>hhmm</name>
-        <rename>hhmm</rename>
+        <name>minute</name>
+        <rename>fmin</rename>
         <default />
         <type>None</type>
       </value>
@@ -1924,58 +2227,8 @@ var json = JSON.stringify(json);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>656</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Radon Limit</name>
-    <type>GetVariable</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>PT</name>
-        <variable>${RADON_PT_LIMIT}</variable>
-        <type>Number</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>WHO</name>
-        <variable>${RADON_WHO_LIMIT}</variable>
-        <type>Number</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>96</xloc>
-      <yloc>368</yloc>
+      <xloc>976</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2064,7 +2317,7 @@ var op=true;</jsScript_script>
     </GUI>
   </step>
   <step>
-    <name>Occupation</name>
+    <name>polygon</name>
     <type>DBLookup</type>
     <description />
     <distribute>Y</distribute>
@@ -2080,7 +2333,7 @@ var op=true;</jsScript_script>
     <cache_size>0</cache_size>
     <lookup>
       <schema />
-      <table>occupation</table>
+      <table>dim_polygon</table>
       <orderby />
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
@@ -2090,39 +2343,9 @@ var op=true;</jsScript_script>
         <condition>=</condition>
         <name2 />
       </key>
-      <key>
-        <name>daytemp</name>
-        <field>dayname</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>monthtemp</name>
-        <field>monthname</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>hhmm</name>
-        <field>starttime</field>
-        <condition>&lt;=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>hhmm</name>
-        <field>endtime</field>
-        <condition>&gt;=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>op</name>
-        <field>isopen</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
       <value>
-        <name>isopen</name>
-        <rename>isopentemp</rename>
+        <name>polygon_tk</name>
+        <rename>polygon_tk</rename>
         <default />
         <type>None</type>
       </value>
@@ -2135,148 +2358,13 @@ var op=true;</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>816</xloc>
+      <xloc>416</xloc>
       <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>ISOPEN</name>
-    <type>ScriptValueMod</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>//Script here
-
-var isopen;
-var thi;
-
-if (isopentemp==null){
-	isopen=false;
-}
-else if (isopentemp==false){
-	isopen=false;
-}else if (isopentemp==true){
-	isopen=true;
-}
-
-
-if(thi_values==null){
-	thi=0;
-}else{
-	thi=thi_values
-}</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>isopen</name>
-        <rename>isopen</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>thi</name>
-        <rename>thi</rename>
-        <type>Number</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>912</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>THI_OCC</name>
-    <type>DBLookup</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>CONNF</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema />
-      <table>thi_occupation</table>
-      <orderby />
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>isopen</name>
-        <field>isoccupied</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>thi</name>
-        <field>thi_lower_limit</field>
-        <condition>&lt;=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>thi</name>
-        <field>thi_upper_limit</field>
-        <condition>&gt;</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>thi_occ_id</name>
-        <rename>thi_occ_id</rename>
-        <default />
-        <type>None</type>
-      </value>
-      <value>
-        <name>thi_description</name>
-        <rename>thi_description</rename>
-        <default />
-        <type>None</type>
-      </value>
-    </lookup>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>992</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Fact Values</name>
+    <name>Select values</name>
     <type>SelectValues</type>
     <description />
     <distribute>Y</distribute>
@@ -2287,137 +2375,110 @@ if(thi_values==null){
       <schema_name />
     </partitioning>
     <fields>
-      <field>
-        <name>polygon_tk</name>
-        <rename>polygon_fk</rename>
-      </field>
-      <field>
-        <name>time_id</name>
-        <rename>time_fk</rename>
-      </field>
-      <field>
-        <name>date_id</name>
-        <rename>date_fk</rename>
-      </field>
-      <field>
-        <name>thi_occ_id</name>
-        <rename>thi_occ_fk</rename>
-      </field>
-      <field>
-        <name>sensorId</name>
-        <rename>apikey</rename>
-      </field>
-      <field>
-        <name>temperature</name>
-        <rename />
-      </field>
-      <field>
-        <name>radon</name>
-        <rename />
-      </field>
-      <field>
-        <name>humidity</name>
-        <rename />
-      </field>
-      <field>
-        <name>pressure</name>
-        <rename />
-      </field>
-      <field>
-        <name>co2</name>
-        <rename />
-      </field>
-      <field>
-        <name>rn_kpi_pt</name>
-        <rename />
-      </field>
-      <field>
-        <name>rn_kpi_who</name>
-        <rename />
-      </field>
-      <field>
-        <name>thi</name>
-        <rename>thi_value</rename>
-      </field>
       <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>time</name>
+        <rename>time</rename>
+        <type>Number</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>T</name>
+        <rename>T</rename>
+        <type>Number</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>Rn</name>
+        <rename>Rn</rename>
+        <type>Number</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>H</name>
+        <rename>H</rename>
+        <type>Number</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>P</name>
+        <rename>P</rename>
+        <type>Number</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>CO2</name>
+        <rename>CO2</rename>
+        <type>Number</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
     </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1088</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Fact</name>
-    <type>TableOutput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>CONNF</connection>
-    <schema />
-    <table>fact_measurement</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>N</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field />
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field />
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field />
-    <fields>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1184</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Filter rows</name>
-    <type>FilterRows</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <send_true_to>Radon Limit</send_true_to>
-    <send_false_to>No readings</send_false_to>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>sensorId</leftvalue>
-        <function>IS NOT NULL</function>
-        <rightvalue />
-      </condition>
-    </compare>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -2427,31 +2488,7 @@ if(thi_values==null){
     </remotesteps>
     <GUI>
       <xloc>96</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>No readings</name>
-    <type>Dummy</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>272</xloc>
-      <yloc>240</yloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

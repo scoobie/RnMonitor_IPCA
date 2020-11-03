@@ -707,3 +707,4 @@ ORDER BY polygon_tk
   </slave-step-copy-partition-distribution>
   <slave_transformation>N</slave_transformation>
 </transformation>
+

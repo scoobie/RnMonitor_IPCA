@@ -590,11 +590,6 @@
     </hop>
     <hop>
       <from>JSON </from>
-      <to>Decimal Point</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Decimal Point</from>
       <to>Mesurements</to>
       <enabled>Y</enabled>
     </hop>
@@ -644,7 +639,7 @@ var json = JSON.stringify(json);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>496</xloc>
+      <xloc>512</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
@@ -749,6 +744,45 @@ var json = JSON.stringify(json);</jsScript_script>
     </GUI>
   </step>
   <step>
+    <name>Calculator final</name>
+    <type>Calculator</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <calculation>
+      <field_name>df</field_name>
+      <calc_type>ADD_HOURS</calc_type>
+      <field_a>finalDate</field_a>
+      <field_b>deltaBefore</field_b>
+      <field_c />
+      <value_type>None</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask />
+      <decimal_symbol />
+      <grouping_symbol />
+      <currency_symbol />
+    </calculation>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Date</name>
     <type>DBLookup</type>
     <description />
@@ -842,37 +876,27 @@ var dn= Date.now();
 var dt=new Date(dn);
 
 var nyear=dt.getYear()+1900;
-var nmonth=dt.getMonth();
+var nmonth=dt.getMonth()+1;
 var nday=dt.getDate();
 var nhour=dt.getHours();
 
 var date2000=new Date(2000,00,01,00,00,00,000);
+var finalDate=new Date(nyear,nmonth-1,nday,nhour,00,000);
 
-
-
-var dateEnd=dt.getTime();
 
 var dateStart=date2000.getTime();
+var deltaBefore=-1;
 
-
-
-var dn= Date.now();
-var dateNow=new Date(dn);
-
-var lastDate= new Date(fyear,fmonth-1,fday,fhour,00,00,000);
-var finalDate= new Date(nyear,nmonth,nday,nhour,59,59,999);
-
-var deltaBefore=-2;
-var deltaAfter=1;
+;
 
 </jsScript_script>
       </jsScript>
     </jsScripts>
     <fields>
       <field>
-        <name>dateEnd</name>
-        <rename>dateEnd</rename>
-        <type>Integer</type>
+        <name>finalDate</name>
+        <rename>finalDate</rename>
+        <type>Date</type>
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
@@ -880,6 +904,14 @@ var deltaAfter=1;
       <field>
         <name>dateStart</name>
         <rename>dateStart</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>deltaBefore</name>
+        <rename>deltaBefore</rename>
         <type>Integer</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -894,7 +926,54 @@ var deltaAfter=1;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
+      <xloc>160</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Date end</name>
+    <type>ScriptValueMod</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>//Script here
+
+var dateEnd;
+
+dateEnd=df.getTime();</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>dateEnd</name>
+        <rename>dateEnd</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>416</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1187,66 +1266,66 @@ if(thi_values==null){
       <field>
         <name>T</name>
         <path>$..T</path>
-        <type>String</type>
-        <format>0.00</format>
+        <type>Number</type>
+        <format />
         <currency />
         <decimal />
         <group />
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
         <name>Rn</name>
         <path>$..Rn</path>
-        <type>String</type>
-        <format>0.00</format>
+        <type>Number</type>
+        <format />
         <currency />
         <decimal />
         <group />
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
         <name>H</name>
         <path>$..H</path>
-        <type>String</type>
-        <format>0.00</format>
+        <type>Number</type>
+        <format />
         <currency />
         <decimal />
         <group />
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
         <name>P</name>
         <path>$..P</path>
-        <type>String</type>
-        <format>0.00</format>
+        <type>Number</type>
+        <format />
         <currency />
         <decimal />
         <group />
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
         <name>CO2</name>
         <path>$..CO2</path>
-        <type>String</type>
-        <format>0.00</format>
+        <type>Number</type>
+        <format />
         <currency />
         <decimal />
         <group />
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
@@ -1283,7 +1362,7 @@ if(thi_values==null){
       </output>
     </remotesteps>
     <GUI>
-      <xloc>672</xloc>
+      <xloc>704</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2039,173 +2118,6 @@ var op=true;</jsScript_script>
       <draw>Y</draw>
     </GUI>
   </step>
-  <step>
-    <name>Calculator final</name>
-    <type>Calculator</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <calculation>
-      <field_name>df</field_name>
-      <calc_type>ADD_HOURS</calc_type>
-      <field_a>finalDate</field_a>
-      <field_b>deltaBefore</field_b>
-      <field_c />
-      <value_type>None</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask />
-      <decimal_symbol />
-      <grouping_symbol />
-      <currency_symbol />
-    </calculation>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>288</xloc>
-      <yloc>32</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Date end</name>
-    <type>ScriptValueMod</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>//Script here
-
-var dateEnd;
-
-dateEnd=df.getTime();</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>dateEnd</name>
-        <rename>dateEnd</rename>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>400</xloc>
-      <yloc>32</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Decimal Point</name>
-    <type>ReplaceString</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>CO2</in_stream_name>
-        <out_stream_name />
-        <use_regex>no</use_regex>
-        <replace_string>.</replace_string>
-        <replace_by_string>,</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string />
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-      </field>
-      <field>
-        <in_stream_name>H</in_stream_name>
-        <out_stream_name />
-        <use_regex>no</use_regex>
-        <replace_string>.</replace_string>
-        <replace_by_string>,</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string />
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-      </field>
-      <field>
-        <in_stream_name>P</in_stream_name>
-        <out_stream_name />
-        <use_regex>no</use_regex>
-        <replace_string>.</replace_string>
-        <replace_by_string>,</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string />
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-      </field>
-      <field>
-        <in_stream_name>Rn</in_stream_name>
-        <out_stream_name />
-        <use_regex>no</use_regex>
-        <replace_string>.</replace_string>
-        <replace_by_string>,</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string />
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-      </field>
-      <field>
-        <in_stream_name>T</in_stream_name>
-        <out_stream_name />
-        <use_regex>no</use_regex>
-        <replace_string>.</replace_string>
-        <replace_by_string>,</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string />
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>768</xloc>
-      <yloc>32</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step_error_handling>
     <error>
       <source_step>ISOPEN</source_step>
@@ -2224,3 +2136,4 @@ dateEnd=df.getTime();</jsScript_script>
   </slave-step-copy-partition-distribution>
   <slave_transformation>N</slave_transformation>
 </transformation>
+
